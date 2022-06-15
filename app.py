@@ -12,7 +12,7 @@ app = Flask(__name__)
 db = SQLAlchemy()
 DB_NAME = "database.db"
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-db.init_app(app)
+# db.init_app(app)
 
 class Logindata(db.Model):
     id = db.Column(db.Integer,primary_key=True)
@@ -47,7 +47,7 @@ def espupdate():
         return "pass"
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
+#     with app.app_context():
+#         db.create_all()
     # db.switch.drop()
-    app.run(host='0.0.0.0', port=82)
+    app.run()
