@@ -5,33 +5,25 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, jsonify
 from datetime import datetime
 import json
-
+import pymongo
 
 app = Flask(__name__)
 
-db = SQLAlchemy()
-DB_NAME = "database.db"
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-# db.init_app(app)
 
-class Logindata(db.Model):
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(1000))
-    email = db.Column(db.String(1000))
-    passsword = db.Column(db.String(1000))
-    addkey = db.Column(db.String(1000))
-
-    
 @app.route('/', methods=['GET', 'POST']) 
 def data():
     try:
-        dates = db.session.query(Logindata.name).all()
-        times = db.session.query(Logindata.email).all() 
-        state = db.session.query(Logindata.passsword).all() 
+        
+        client = pymongo.MongoClient("mongodb+srv://SahilCluster18:meHtA9662@sahilcluster.qmaty.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        db = client.test
+        db1 = client["tankdata"]
+        dates = client.list_database_names()
+        times = client.list_database_names() 
+        state = client.list_database_names() 
         return render_template('data.html',data = dates[::-1] ,data1 = times[::-1],status = state[::-1])
     except:
         return "Error"
-        
+
 @app.route('/espupdate', methods=['GET','POST'])
 def espupdate():
     try:
@@ -39,15 +31,15 @@ def espupdate():
         b = request.args.get('b')
         c = request.args.get('c')
         d = request.args.get('d')
-        t = Logindata(name  = a , email= b ,passsword=c, addkey = d)
-        db.session.add(t)
-        db.session.commit()
+        # t = Logindata(name  = a , email= b ,passsword=c, addkey = d)
+        # db.session.add(t)
+        # db.session.commit()
         return "add done"
     except:
         return "pass"
 
 if __name__ == '__main__':
-#     with app.app_context():
-#         db.create_all()
+    # with app.app_context():
+    #     db.create_all()
     # db.switch.drop()
     app.run()
