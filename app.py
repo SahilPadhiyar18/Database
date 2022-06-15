@@ -20,7 +20,7 @@ def data():
         dates = client.list_database_names()
         times = client.list_database_names() 
         state = client.list_database_names() 
-        return render_template('data.html',data = dates[::-1] ,data1 = times[::-1],status = state[::-1])
+        return "Done"
     except:
         return "Error"
 
