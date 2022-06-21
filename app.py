@@ -13,8 +13,10 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST']) 
 def data():
     try:
-        client = pymongo.MongoClient("mongodb+srv://SahilCluster18:meHtA9662@sahilcluster.qmaty.mongodb.net/?retryWrites=true&w=majority")
-        db = client.test 
+        client = pymongo.MongoClient("mongodb+srv://SahilCluster18:meHtA9662@sahilcluster.qmaty.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
+#         client = pymongo.MongoClient("mongodb+srv://SahilCluster18:meHtA9662@sahilcluster.qmaty.mongodb.net/?retryWrites=true&w=majority")
+#         db = client.test 
 #         client = pymongo.MongoClient("mongodb+srv://SahilCluster18:meHtA9662@sahilcluster.qmaty.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 #         db = client.test
 #         db1 = client["tankdata"]
